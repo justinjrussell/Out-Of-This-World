@@ -9,6 +9,7 @@
 #import "JJROuterSpaceTableViewController.h"
 #import "AstronomicalData.h"
 #import "JRSpaceObject.h"
+#import "JRSpaceImageViewController.h"
 
 @interface JJROuterSpaceTableViewController ()
 
@@ -47,6 +48,7 @@
 //    NSLog(@"%@",blueString);
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -117,14 +119,23 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([sender isKindOfClass:[UITableViewCell class]])
+    {
+        if([segue.destinationViewController isKindOfClass:[JRSpaceImageViewController class]])
+        {
+            JRSpaceImageViewController *nextViewController = segue.destinationViewController;
+            NSIndexPath *path = [self.tableView indexPathForCell:sender];
+            JRSpaceObject *selectedObject = self.planets[path.row];
+            nextViewController.spaceObject = selectedObject;
+        }
+    }
 }
-*/
+
 
 @end
