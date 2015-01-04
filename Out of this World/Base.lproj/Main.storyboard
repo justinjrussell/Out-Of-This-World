@@ -8,7 +8,7 @@
         <scene sceneID="6sI-JN-g2J">
             <objects>
                 <tableViewController storyboardIdentifier="sbOutSpace" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EhT-bS-uIq" customClass="JJROuterSpaceTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bjM-4R-8qC">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="bjM-4R-8qC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,7 +42,13 @@
                             <outlet property="delegate" destination="EhT-bS-uIq" id="wja-dP-cZJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Planets" id="CDW-ci-xti"/>
+                    <navigationItem key="navigationItem" title="Planets" id="CDW-ci-xti">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lgu-9S-JYr">
+                            <connections>
+                                <segue destination="pxL-X8-bWq" kind="presentation" id="CHH-iL-wIi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="LgI-9P-XWr" kind="show" identifier="push to space data" id="eJS-Ow-z48"/>
@@ -136,6 +142,89 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGl-d7-Qmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1436.5" y="789.5"/>
+        </scene>
+        <!--Add Space Object View Controller-->
+        <scene sceneID="LZI-Tl-e1A">
+            <objects>
+                <viewController id="pxL-X8-bWq" customClass="OWAddSpaceObjectViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zLi-hU-OOT"/>
+                        <viewControllerLayoutGuide type="bottom" id="Waf-EW-JLq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6ez-zm-fvX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CR-xw-c4f">
+                                <rect key="frame" x="66" y="273" width="75" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.25337347850000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonPressed:" destination="pxL-X8-bWq" eventType="touchUpInside" id="Yaq-ud-jKg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bSO-nA-gV2">
+                                <rect key="frame" x="224" y="273" width="75" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.11449829409740042" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Add">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="pxL-X8-bWq" eventType="touchUpInside" id="Ifc-2S-LYZ"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VKv-ad-LtW">
+                                <rect key="frame" x="16" y="28" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nickname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0fg-z4-zuG">
+                                <rect key="frame" x="16" y="66" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Diameter" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vxu-2y-Vwj">
+                                <rect key="frame" x="16" y="104" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Number of Moons" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uLY-qa-bdk">
+                                <rect key="frame" x="16" y="180" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Interesting Fact" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jay-CC-6xf">
+                                <rect key="frame" x="16" y="218" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Temperature" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pFR-xm-Wjl">
+                                <rect key="frame" x="16" y="142" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="diameterTextField" destination="vxu-2y-Vwj" id="wk4-Zk-HJH"/>
+                        <outlet property="interestingFactTextField" destination="Jay-CC-6xf" id="PmR-AS-pve"/>
+                        <outlet property="nameTextField" destination="VKv-ad-LtW" id="aFq-IK-Scc"/>
+                        <outlet property="nicknameTextField" destination="0fg-z4-zuG" id="awx-Qd-8ZX"/>
+                        <outlet property="numberOfMoonsTextField" destination="uLY-qa-bdk" id="5mk-JP-ciA"/>
+                        <outlet property="temperatureTextField" destination="pFR-xm-Wjl" id="vae-hy-UnX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BDh-cf-YHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="963.5" y="1284.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0KL-x8-X2n">

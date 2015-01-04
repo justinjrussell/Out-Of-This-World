@@ -34,16 +34,45 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - OWAddSpaceObjectViewController Delegate
+
+-(void)didCancel
+{
+    NSLog(@"didCancel");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)addSpaceObject:(JRSpaceObject *)spaceObject
+{
+    if(!self.addedSpaceObejcts){
+        self.addedSpaceObejcts = [[NSMutableArray alloc] init];
+    }
+    [self.addedSpaceObejcts addObject:spaceObject];
+    NSLog(@"addSpaceObject");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    if([self.addedSpaceObejcts count]){
+        return 2;
+    }else{
+        return 1;
+    }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.planets count];
+    if(section == 1){
+        return [self.addedSpaceObejcts count];
+    }else{
+        return [self.planets count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,10 +80,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    JRSpaceObject *planet = [self.planets objectAtIndex:(int)indexPath.row];
-    cell.textLabel.text = planet.name;
-    cell.detailTextLabel.text = planet.nickname;
-    cell.imageView.image = planet.spaceImage;
+    if(indexPath.section == 1){
+        JRSpaceObject *planet = [self.addedSpaceObejcts objectAtIndex:indexPath.row];
+        cell.textLabel.text = planet.name;
+        cell.detailTextLabel.text = planet.nickname;
+        cell.imageView.image = planet.spaceImage;
+    }else{
+        JRSpaceObject *planet = [self.planets objectAtIndex:(int)indexPath.row];
+        cell.textLabel.text = planet.name;
+        cell.detailTextLabel.text = planet.nickname;
+        cell.imageView.image = planet.spaceImage;
+    }
+    
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.5 alpha:1.0];
@@ -73,7 +110,13 @@
         {
             JRSpaceImageViewController *nextViewController = segue.destinationViewController;
             NSIndexPath *path = [self.tableView indexPathForCell:sender];
-            JRSpaceObject *selectedObject = self.planets[path.row];
+            JRSpaceObject *selectedObject;
+            if(path.section == 0){
+                selectedObject = self.planets[path.row];
+            }else if(path.section == 1){
+                selectedObject = self.addedSpaceObejcts[path.row];
+            }
+            
             nextViewController.spaceObject = selectedObject;
         }
     }
@@ -83,9 +126,19 @@
         {
             JRSpaceDataViewController *targetViewController = segue.destinationViewController;
             NSIndexPath *path = sender;
-            JRSpaceObject *selectedObject = self.planets[path.row];
+            JRSpaceObject *selectedObject;
+            if(path.section == 0){
+                selectedObject = self.planets[path.row];
+            }else if(path.section == 1){
+                selectedObject = self.addedSpaceObejcts[path.row];
+            }
             targetViewController.spaceObject = selectedObject;
         }
+    }
+    
+    if([segue.destinationViewController isKindOfClass:[OWAddSpaceObjectViewController class]]){
+        OWAddSpaceObjectViewController *addSpaceObjectVC = segue.destinationViewController;
+        addSpaceObjectVC.delegate = self;
     }
 }
 

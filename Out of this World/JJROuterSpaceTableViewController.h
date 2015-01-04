@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OWAddSpaceObjectViewController.h"
 
-@interface JJROuterSpaceTableViewController : UITableViewController
+@interface JJROuterSpaceTableViewController : UITableViewController<OWAddSpaceObjectViewControllerDelegate>
 
 @property (strong,nonatomic) NSMutableArray *planets;
+@property (strong,nonatomic) NSMutableArray *addedSpaceObejcts;
 
 @end

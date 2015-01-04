@@ -28,6 +28,7 @@
 		41F8F74C1A4A5AF000872F7B /* JRSpaceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F74B1A4A5AF000872F7B /* JRSpaceObject.m */; };
 		41F8F78D1A4E425000872F7B /* JRSpaceImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F78C1A4E425000872F7B /* JRSpaceImageViewController.m */; };
 		41F8F7C41A52A59E00872F7B /* JRSpaceDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F7C31A52A59E00872F7B /* JRSpaceDataViewController.m */; };
+		41F8F7C71A575C5700872F7B /* OWAddSpaceObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F7C61A575C5700872F7B /* OWAddSpaceObjectViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		41F8F78C1A4E425000872F7B /* JRSpaceImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSpaceImageViewController.m; sourceTree = "<group>"; };
 		41F8F7C21A52A59E00872F7B /* JRSpaceDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSpaceDataViewController.h; sourceTree = "<group>"; };
 		41F8F7C31A52A59E00872F7B /* JRSpaceDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSpaceDataViewController.m; sourceTree = "<group>"; };
+		41F8F7C51A575C5700872F7B /* OWAddSpaceObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OWAddSpaceObjectViewController.h; sourceTree = "<group>"; };
+		41F8F7C61A575C5700872F7B /* OWAddSpaceObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OWAddSpaceObjectViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		410D0B5D1A5A01CE001F3F7A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				41F8F74A1A4A5AF000872F7B /* JRSpaceObject.h */,
+				41F8F74B1A4A5AF000872F7B /* JRSpaceObject.m */,
+				41F8F6FE1A4403D000872F7B /* AstronomicalData.h */,
+				41F8F6FF1A4403D000872F7B /* AstronomicalData.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		410D0B5E1A5A01FC001F3F7A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				41F8F7361A4A5A8900872F7B /* Earth.jpg */,
+				41F8F7371A4A5A8900872F7B /* EinsteinRing.jpg */,
+				41F8F7381A4A5A8900872F7B /* Jupiter.jpg */,
+				41F8F7391A4A5A8900872F7B /* Mars.jpg */,
+				41F8F73A1A4A5A8900872F7B /* Mercury.jpg */,
+				41F8F73B1A4A5A8900872F7B /* Neptune.jpg */,
+				41F8F73C1A4A5A8900872F7B /* Orion.jpg */,
+				41F8F73D1A4A5A8900872F7B /* Saturn.jpg */,
+				41F8F73E1A4A5A8900872F7B /* Uranus.jpg */,
+				41F8F73F1A4A5A8900872F7B /* Venus.jpg */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		410D0B5F1A5A0244001F3F7A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				41F8F6FB1A42B90200872F7B /* JJROuterSpaceTableViewController.h */,
+				41F8F6FC1A42B90200872F7B /* JJROuterSpaceTableViewController.m */,
+				41F8F78B1A4E425000872F7B /* JRSpaceImageViewController.h */,
+				41F8F78C1A4E425000872F7B /* JRSpaceImageViewController.m */,
+				41F8F7C21A52A59E00872F7B /* JRSpaceDataViewController.h */,
+				41F8F7C31A52A59E00872F7B /* JRSpaceDataViewController.m */,
+				41F8F7C51A575C5700872F7B /* OWAddSpaceObjectViewController.h */,
+				41F8F7C61A575C5700872F7B /* OWAddSpaceObjectViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		41F8F6C91A42B7EC00872F7B = {
 			isa = PBXGroup;
 			children = (
@@ -113,19 +159,11 @@
 		41F8F6D41A42B7ED00872F7B /* Out of this World */ = {
 			isa = PBXGroup;
 			children = (
-				41F8F6D91A42B7ED00872F7B /* AppDelegate.h */,
-				41F8F6DA1A42B7ED00872F7B /* AppDelegate.m */,
 				41F8F6DF1A42B7ED00872F7B /* Main.storyboard */,
-				41F8F6FB1A42B90200872F7B /* JJROuterSpaceTableViewController.h */,
-				41F8F6FC1A42B90200872F7B /* JJROuterSpaceTableViewController.m */,
-				41F8F78B1A4E425000872F7B /* JRSpaceImageViewController.h */,
-				41F8F78C1A4E425000872F7B /* JRSpaceImageViewController.m */,
-				41F8F7C21A52A59E00872F7B /* JRSpaceDataViewController.h */,
-				41F8F7C31A52A59E00872F7B /* JRSpaceDataViewController.m */,
-				41F8F74A1A4A5AF000872F7B /* JRSpaceObject.h */,
-				41F8F74B1A4A5AF000872F7B /* JRSpaceObject.m */,
-				41F8F6E21A42B7ED00872F7B /* Images.xcassets */,
 				41F8F6E41A42B7ED00872F7B /* LaunchScreen.xib */,
+				410D0B5D1A5A01CE001F3F7A /* Models */,
+				410D0B5F1A5A0244001F3F7A /* View Controllers */,
+				41F8F6E21A42B7ED00872F7B /* Images.xcassets */,
 				41F8F6D51A42B7ED00872F7B /* Supporting Files */,
 			);
 			path = "Out of this World";
@@ -134,18 +172,9 @@
 		41F8F6D51A42B7ED00872F7B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				41F8F7361A4A5A8900872F7B /* Earth.jpg */,
-				41F8F7371A4A5A8900872F7B /* EinsteinRing.jpg */,
-				41F8F7381A4A5A8900872F7B /* Jupiter.jpg */,
-				41F8F7391A4A5A8900872F7B /* Mars.jpg */,
-				41F8F73A1A4A5A8900872F7B /* Mercury.jpg */,
-				41F8F73B1A4A5A8900872F7B /* Neptune.jpg */,
-				41F8F73C1A4A5A8900872F7B /* Orion.jpg */,
-				41F8F73D1A4A5A8900872F7B /* Saturn.jpg */,
-				41F8F73E1A4A5A8900872F7B /* Uranus.jpg */,
-				41F8F73F1A4A5A8900872F7B /* Venus.jpg */,
-				41F8F6FE1A4403D000872F7B /* AstronomicalData.h */,
-				41F8F6FF1A4403D000872F7B /* AstronomicalData.m */,
+				410D0B5E1A5A01FC001F3F7A /* Images */,
+				41F8F6D91A42B7ED00872F7B /* AppDelegate.h */,
+				41F8F6DA1A42B7ED00872F7B /* AppDelegate.m */,
 				41F8F6D61A42B7ED00872F7B /* Info.plist */,
 				41F8F6D71A42B7ED00872F7B /* main.m */,
 			);
@@ -279,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41F8F7C71A575C5700872F7B /* OWAddSpaceObjectViewController.m in Sources */,
 				41F8F6DB1A42B7ED00872F7B /* AppDelegate.m in Sources */,
 				41F8F6FD1A42B90200872F7B /* JJROuterSpaceTableViewController.m in Sources */,
 				41F8F6D81A42B7ED00872F7B /* main.m in Sources */,
