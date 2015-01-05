@@ -38,7 +38,6 @@
 
 -(void)didCancel
 {
-    NSLog(@"didCancel");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -48,7 +47,6 @@
         self.addedSpaceObejcts = [[NSMutableArray alloc] init];
     }
     [self.addedSpaceObejcts addObject:spaceObject];
-    NSLog(@"addSpaceObject");
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.tableView reloadData];
