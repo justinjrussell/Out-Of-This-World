@@ -17,15 +17,38 @@
 @end
 
 @implementation JJROuterSpaceTableViewController
+#define ADDED_SPACE_OBJECTS_KEY @"Added Space Object Array"
+
+#pragma mark - Lazy Instantiation of Properties
+
+-(NSMutableArray *)planets
+{
+    if(!_planets){
+        _planets = [[NSMutableArray alloc] init];
+    }
+    return _planets;
+}
+
+-(NSMutableArray *)addedSpaceObejcts
+{
+    if(!_addedSpaceObejcts){
+        _addedSpaceObejcts = [[NSMutableArray alloc] init];
+    }
+    return _addedSpaceObejcts;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.planets = [[NSMutableArray alloc] init];
     for (NSMutableDictionary *planetData in [AstronomicalData allKnownPlanets]) {
         NSString *imageName = [NSString stringWithFormat:@"%@.jpg",planetData[PLANET_NAME]];
         JRSpaceObject *planet = [[JRSpaceObject alloc] initWithData:planetData andImage:[UIImage imageNamed:imageName]];
         [self.planets addObject:planet];
+    }
+    NSArray *myPlanetsAsPropertyLists = [[NSUserDefaults standardUserDefaults] arrayForKey:ADDED_SPACE_OBJECTS_KEY];
+    for (NSDictionary *dictionary in myPlanetsAsPropertyLists) {
+        JRSpaceObject *spaceObject = [self spaceObjectForDictionary:dictionary];
+        [self.addedSpaceObejcts addObject:spaceObject];
     }
 }
 
@@ -43,13 +66,45 @@
 
 -(void)addSpaceObject:(JRSpaceObject *)spaceObject
 {
-    if(!self.addedSpaceObejcts){
-        self.addedSpaceObejcts = [[NSMutableArray alloc] init];
-    }
     [self.addedSpaceObejcts addObject:spaceObject];
+    
+    //Will save to NSUserDefaults here
+    NSMutableArray *spaceObjectsAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:ADDED_SPACE_OBJECTS_KEY] mutableCopy];
+    if(!spaceObjectsAsPropertyLists) spaceObjectsAsPropertyLists = [[NSMutableArray alloc] init];
+    
+    [spaceObjectsAsPropertyLists addObject:[self spaceObjectAsAPropertyList:spaceObject]];
+    [[NSUserDefaults standardUserDefaults] setObject:spaceObjectsAsPropertyLists forKey:ADDED_SPACE_OBJECTS_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.tableView reloadData];
+}
+
+#pragma mark - Helper Methods
+
+-(NSDictionary *)spaceObjectAsAPropertyList:(JRSpaceObject *)spaceObject
+{
+    NSData *imageData = UIImagePNGRepresentation(spaceObject.spaceImage);
+    NSDictionary *dictionary = @{PLANET_NAME: spaceObject.name,
+                                 PLANET_GRAVITY: @(spaceObject.gravitationalForce),
+                                 PLANET_DIAMETER: @(spaceObject.diameter),
+                                 PLANET_YEAR_LENGTH: @(spaceObject.yearLength),
+                                 PLANET_DAY_LENGTH: @(spaceObject.dayLength),
+                                 PLANET_TEMPERATURE: @(spaceObject.temperature),
+                                 PLANET_NUMBER_OF_MOONS: @(spaceObject.numberOfMoons),
+                                 PLANET_NICKNAME: spaceObject.nickname,
+                                 PLANET_INTERESTING_FACT: spaceObject.interestFact,
+                                 PLANET_IMAGE: imageData};
+    return dictionary;
+}
+
+-(JRSpaceObject *)spaceObjectForDictionary:(NSDictionary *)dictionary
+{
+    NSData *dataForImage = dictionary[PLANET_IMAGE];
+    UIImage *spaceObjectImage = [UIImage imageWithData:dataForImage];
+    JRSpaceObject *spaceObject = [[JRSpaceObject alloc] initWithData:dictionary andImage:spaceObjectImage];
+    return spaceObject;
 }
 
 #pragma mark - Table view data source
@@ -95,6 +150,33 @@
     cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.5 alpha:1.0];
     
     return cell;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 1){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete){
+        [self.addedSpaceObejcts removeObjectAtIndex:indexPath.row];
+        
+        NSMutableArray *newSavedSpaceObjectData = [[NSMutableArray alloc] init];
+        for(JRSpaceObject *spaceObject in self.addedSpaceObejcts){
+            [newSavedSpaceObjectData addObject:[self spaceObjectAsAPropertyList:spaceObject]];
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:newSavedSpaceObjectData forKey:ADDED_SPACE_OBJECTS_KEY];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }else if(editingStyle == UITableViewCellEditingStyleInsert){
+        
+    }
 }
 
 #pragma mark - Navigation
